@@ -1,4 +1,6 @@
+--не путать с немецкими дабл-эсками. тут 3
 print("S.S.S. started")
+--хахахаха у меня ascii есть даже
 print([[
 
 
@@ -12,8 +14,9 @@ print([[
 
 
 ]])
+--это чтобы если не запустилось
 returned = 1
-
+--ждать до клавиши
 function wait_key_event(t, key)
 	local time2 = Timer()
 	local time = Timer()
@@ -30,16 +33,18 @@ function wait_key_event(t, key)
 	end
 	time:reset()
 end
-
+--ждать
 function wait(t)
 	wait_key_event(t, "-1")
 end
 
 function open_boot_config()
-	drawImage("/furre_kartinka.bmp", 0, 0, 0)
+--TODO: хз допишу то что в названии функции.
+	drawImage("", 0, 0, 0)
 	wait(10000)
 end
 
+--функция смерти
 local function die()
 	print("bad config")
 	drawImage("/criticalError.png", 0, 0, 0)
@@ -53,6 +58,8 @@ drawImage("/boot.png", 0, 0, 0)
 wait(2000)
 print("next step of loading..")
 
+
+--загрузочник
 local path_to_boot = readConfig("/run.conf", "sys")
 if path_to_boot == nil then
 	die()
@@ -63,12 +70,14 @@ else
 	end
 end
 
+--отладка
 print("run sys..")
 print("booting: " .. readConfig(path_to_boot, "name"))
 print("version: " .. readConfig(path_to_boot, "version"))
 print("first setup file: " .. readConfig(path_to_boot, "boot"))
 print(runFile(readConfig(path_to_boot, "boot")))
 
+--exit коды
 if returned == 0 then
 	print("good exit, block")
 	while true do

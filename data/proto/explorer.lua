@@ -1,3 +1,5 @@
+
+--я не буду это коментировать. как нибудь сами.
 formatsTxt =
 	{ ".txt", ".csv", ".tsv", ".json", ".jsonl", ".xml", ".html" },
 	{ ".md", ".rst", ".yaml", ".toml", ".ini", ".cfg", ".conf", ".log" },

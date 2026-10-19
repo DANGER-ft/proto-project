@@ -28,8 +28,8 @@ FtpServer ftpSrv;
 #include <memory.h>
 
 
-const char* ssid = "Keenetic-6043";
-const char* password = "3fJMzc3u";
+const char* ssid = "бебебе";
+const char* password = "бабаба";
 
 static bool tftJpgOutput(int16_t x, int16_t y, uint16_t w, uint16_t h, uint16_t *bitmap)
 {

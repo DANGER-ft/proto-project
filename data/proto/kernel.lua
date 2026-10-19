@@ -1,3 +1,9 @@
+
+--чтобы vs:code не ругался. но я во featherPad-е пишу, это забота о вас
+--...
+--...
+--...
+--я так подумал хватит заботы UwU, коментарии будут позже
 ---@diagnostic disable: undefined-global
 local hot_bar_list = {}
 local hot_bar_busy = { 0, 0, 0, 0, 0, 0 }

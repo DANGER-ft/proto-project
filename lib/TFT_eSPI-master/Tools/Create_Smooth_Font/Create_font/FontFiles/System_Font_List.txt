@@ -1,0 +1,390 @@
+[0] Abyssinica SIL
+[1] Ani
+[2] AnjaliOldLipi Regular
+[3] Bitstream Charter
+[4] Bitstream Charter Bold
+[5] Bitstream Charter Bold Italic
+[6] Bitstream Charter Italic
+[7] C059-BdIta
+[8] C059-Bold
+[9] C059-Italic
+[10] C059-Roman
+[11] Century Schoolbook L Bold
+[12] Century Schoolbook L Bold Italic
+[13] Century Schoolbook L Italic
+[14] Century Schoolbook L Roman
+[15] Chandas
+[16] Chilanka Regular
+[17] Courier 10 Pitch
+[18] Courier 10 Pitch Bold
+[19] Courier 10 Pitch Bold Italic
+[20] Courier 10 Pitch Italic
+[21] CustomTkinter_shapes_font Regular
+[22] D050000L
+[23] DejaVu Sans
+[24] DejaVu Sans Bold
+[25] DejaVu Sans Bold Oblique
+[26] DejaVu Sans Condensed
+[27] DejaVu Sans Condensed Bold
+[28] DejaVu Sans Condensed Bold Oblique
+[29] DejaVu Sans Condensed Oblique
+[30] DejaVu Sans ExtraLight
+[31] DejaVu Sans Mono
+[32] DejaVu Sans Mono Bold
+[33] DejaVu Sans Mono Bold Oblique
+[34] DejaVu Sans Mono Oblique
+[35] DejaVu Sans Oblique
+[36] DejaVu Serif
+[37] DejaVu Serif Bold
+[38] DejaVu Serif Bold Italic
+[39] DejaVu Serif Condensed
+[40] DejaVu Serif Condensed Bold
+[41] DejaVu Serif Condensed Bold Italic
+[42] DejaVu Serif Condensed Italic
+[43] DejaVu Serif Italic
+[44] DejaVuMathTeXGyre-Regular
+[45] Dialog.bold
+[46] Dialog.bolditalic
+[47] Dialog.italic
+[48] Dialog.plain
+[49] DialogInput.bold
+[50] DialogInput.bolditalic
+[51] DialogInput.italic
+[52] DialogInput.plain
+[53] Dingbats 
+[54] Droid Sans Fallback
+[55] Dyuthi Regular
+[56] FreeMono
+[57] FreeMono Bold
+[58] FreeMono Bold Oblique
+[59] FreeMono Oblique
+[60] FreeSans
+[61] FreeSans Bold
+[62] FreeSans Bold Oblique
+[63] FreeSans Oblique
+[64] FreeSerif
+[65] FreeSerif Bold
+[66] FreeSerif Bold Italic
+[67] FreeSerif Italic
+[68] Gargi
+[69] Garuda
+[70] Garuda Bold
+[71] Garuda Bold Oblique
+[72] Garuda Oblique
+[73] Gayathri Bold
+[74] Gayathri Regular
+[75] Gayathri Thin
+[76] Gubbi
+[77] Hack Bold
+[78] Hack Bold Italic
+[79] Hack Italic
+[80] Hack Regular
+[81] Jamrul
+[82] KacstArt
+[83] KacstBook
+[84] KacstDecorative
+[85] KacstDigital
+[86] KacstFarsi
+[87] KacstLetter
+[88] KacstNaskh
+[89] KacstOffice
+[90] KacstOne
+[91] KacstOne Bold
+[92] KacstPen
+[93] KacstPoster
+[94] KacstQurn
+[95] KacstScreen
+[96] KacstTitle
+[97] KacstTitleL
+[98] Kalapi
+[99] Kalimati
+[100] Karumbi Regular
+[101] Keraleeyam Regular
+[102] Khmer OS
+[103] Khmer OS System
+[104] Kinnari
+[105] Kinnari Bold
+[106] Kinnari Bold Italic
+[107] Kinnari Bold Oblique
+[108] Kinnari Italic
+[109] Kinnari Oblique
+[110] LKLUG
+[111] Laksaman
+[112] Laksaman Bold
+[113] Laksaman Bold Italic
+[114] Laksaman Italic
+[115] Lato Black
+[116] Lato Black Italic
+[117] Lato Bold
+[118] Lato Bold Italic
+[119] Lato Hairline
+[120] Lato Hairline Italic
+[121] Lato Heavy
+[122] Lato Heavy Italic
+[123] Lato Italic
+[124] Lato Light
+[125] Lato Light Italic
+[126] Lato Medium
+[127] Lato Medium Italic
+[128] Lato Regular
+[129] Lato Semibold
+[130] Lato Semibold Italic
+[131] Lato Thin
+[132] Lato Thin Italic
+[133] Liberation Mono
+[134] Liberation Mono Bold
+[135] Liberation Mono Bold Italic
+[136] Liberation Mono Italic
+[137] Liberation Sans
+[138] Liberation Sans Bold
+[139] Liberation Sans Bold Italic
+[140] Liberation Sans Italic
+[141] Liberation Sans Narrow
+[142] Liberation Sans Narrow Bold
+[143] Liberation Sans Narrow Bold Italic
+[144] Liberation Sans Narrow Italic
+[145] Liberation Serif
+[146] Liberation Serif Bold
+[147] Liberation Serif Bold Italic
+[148] Liberation Serif Italic
+[149] Likhan
+[150] Lohit Assamese
+[151] Lohit Bengali
+[152] Lohit Devanagari
+[153] Lohit Gujarati
+[154] Lohit Gurmukhi
+[155] Lohit Kannada
+[156] Lohit Malayalam
+[157] Lohit Odia
+[158] Lohit Tamil
+[159] Lohit Tamil Classical
+[160] Lohit Telugu
+[161] Loma
+[162] Loma Bold
+[163] Loma Bold Oblique
+[164] Loma Oblique
+[165] Manjari Bold
+[166] Manjari Regular
+[167] Manjari Thin
+[168] Meera Regular
+[169] Mitra Mono
+[170] Monospaced.bold
+[171] Monospaced.bolditalic
+[172] Monospaced.italic
+[173] Monospaced.plain
+[174] Mukti Narrow
+[175] Mukti Narrow Bold
+[176] Nakula
+[177] Navilu
+[178] Nimbus Mono L Bold
+[179] Nimbus Mono L Bold Oblique
+[180] Nimbus Mono L Regular
+[181] Nimbus Mono L Regular Oblique
+[182] Nimbus Roman No9 L Medium
+[183] Nimbus Roman No9 L Medium Italic
+[184] Nimbus Roman No9 L Regular
+[185] Nimbus Roman No9 L Regular Italic
+[186] Nimbus Sans L Bold
+[187] Nimbus Sans L Bold Condensed
+[188] Nimbus Sans L Bold Condensed Italic
+[189] Nimbus Sans L Bold Italic
+[190] Nimbus Sans L Regular
+[191] Nimbus Sans L Regular Condensed
+[192] Nimbus Sans L Regular Condensed Italic
+[193] Nimbus Sans L Regular Italic
+[194] NimbusMonoPS-Bold
+[195] NimbusMonoPS-BoldItalic
+[196] NimbusMonoPS-Italic
+[197] NimbusMonoPS-Regular
+[198] NimbusRoman-Bold
+[199] NimbusRoman-BoldItalic
+[200] NimbusRoman-Italic
+[201] NimbusRoman-Regular
+[202] NimbusSans-Bold
+[203] NimbusSans-BoldItalic
+[204] NimbusSans-Italic
+[205] NimbusSans-Regular
+[206] NimbusSansNarrow-Bold
+[207] NimbusSansNarrow-BoldOblique
+[208] NimbusSansNarrow-Oblique
+[209] NimbusSansNarrow-Regular
+[210] Norasi
+[211] Norasi Bold
+[212] Norasi Bold Italic
+[213] Norasi Bold Oblique
+[214] Norasi Italic
+[215] Norasi Oblique
+[216] Noto Mono
+[217] Noto Sans CJK HK
+[218] Noto Sans CJK HK Bold
+[219] Noto Sans CJK JP
+[220] Noto Sans CJK JP Bold
+[221] Noto Sans CJK KR
+[222] Noto Sans CJK KR Bold
+[223] Noto Sans CJK SC
+[224] Noto Sans CJK SC Bold
+[225] Noto Sans CJK TC
+[226] Noto Sans CJK TC Bold
+[227] Noto Sans Mono CJK HK
+[228] Noto Sans Mono CJK HK Bold
+[229] Noto Sans Mono CJK JP
+[230] Noto Sans Mono CJK JP Bold
+[231] Noto Sans Mono CJK KR
+[232] Noto Sans Mono CJK KR Bold
+[233] Noto Sans Mono CJK SC
+[234] Noto Sans Mono CJK SC Bold
+[235] Noto Sans Mono CJK TC
+[236] Noto Sans Mono CJK TC Bold
+[237] Noto Serif CJK JP
+[238] Noto Serif CJK JP Bold
+[239] Noto Serif CJK KR
+[240] Noto Serif CJK KR Bold
+[241] Noto Serif CJK SC
+[242] Noto Serif CJK SC Bold
+[243] Noto Serif CJK TC
+[244] Noto Serif CJK TC Bold
+[245] OpenSymbol
+[246] P052-Bold
+[247] P052-BoldItalic
+[248] P052-Italic
+[249] P052-Roman
+[250] Padauk
+[251] Padauk Bold
+[252] Padauk Book
+[253] Padauk Book Bold
+[254] Pagul
+[255] Phetsarath OT
+[256] Pothana2000
+[257] Purisa
+[258] Purisa Bold
+[259] Purisa Bold Oblique
+[260] Purisa Oblique
+[261] Rachana Bold
+[262] Rachana Regular
+[263] RaghuMalayalamSans Regular
+[264] Rasa
+[265] Rasa Bold
+[266] Rasa Light
+[267] Rasa Medium
+[268] Rasa SemiBold
+[269] Rekha
+[270] Roboto
+[271] Roboto Black
+[272] Roboto Black Italic
+[273] Roboto Bold
+[274] Roboto Bold Italic
+[275] Roboto Condensed
+[276] Roboto Condensed Bold
+[277] Roboto Condensed Bold Italic
+[278] Roboto Condensed Italic
+[279] Roboto Condensed Light
+[280] Roboto Condensed Light Italic
+[281] Roboto Condensed Medium
+[282] Roboto Condensed Medium Italic
+[283] Roboto Italic
+[284] Roboto Light
+[285] Roboto Light Italic
+[286] Roboto Medium
+[287] Roboto Medium Italic
+[288] Roboto Thin
+[289] Roboto Thin Italic
+[290] Saab
+[291] Sahadeva
+[292] Samanata
+[293] Samyak Devanagari
+[294] Samyak Gujarati
+[295] Samyak Malayalam
+[296] Samyak Tamil
+[297] SansSerif.bold
+[298] SansSerif.bolditalic
+[299] SansSerif.italic
+[300] SansSerif.plain
+[301] Sarai
+[302] Sawasdee
+[303] Sawasdee Bold
+[304] Sawasdee Bold Oblique
+[305] Sawasdee Oblique
+[306] Serif.bold
+[307] Serif.bolditalic
+[308] Serif.italic
+[309] Serif.plain
+[310] Standard Symbols L
+[311] Standard Symbols PS
+[312] Suruma
+[313] Symbola
+[314] Tibetan_Machine_Uni
+[315] Tlwg Mono
+[316] Tlwg Mono Bold
+[317] Tlwg Mono Bold Oblique
+[318] Tlwg Mono Oblique
+[319] Tlwg Typewriter
+[320] Tlwg Typewriter Bold
+[321] Tlwg Typewriter Bold Oblique
+[322] Tlwg Typewriter Oblique
+[323] Tlwg Typist
+[324] Tlwg Typist Bold
+[325] Tlwg Typist Bold Oblique
+[326] Tlwg Typist Oblique
+[327] Tlwg Typo
+[328] Tlwg Typo Bold
+[329] Tlwg Typo Bold Oblique
+[330] Tlwg Typo Oblique
+[331] URW Bookman L Demi Bold
+[332] URW Bookman L Demi Bold Italic
+[333] URW Bookman L Light
+[334] URW Bookman L Light Italic
+[335] URW Chancery L Medium Italic
+[336] URW Gothic L Book
+[337] URW Gothic L Book Oblique
+[338] URW Gothic L Demi
+[339] URW Gothic L Demi Oblique
+[340] URW Palladio L Bold
+[341] URW Palladio L Bold Italic
+[342] URW Palladio L Italic
+[343] URW Palladio L Roman
+[344] URWBookman-Demi
+[345] URWBookman-DemiItalic
+[346] URWBookman-Light
+[347] URWBookman-LightItalic
+[348] URWGothic-Book
+[349] URWGothic-BookOblique
+[350] URWGothic-Demi
+[351] URWGothic-DemiOblique
+[352] Ubuntu
+[353] Ubuntu Bold
+[354] Ubuntu Bold Italic
+[355] Ubuntu Condensed
+[356] Ubuntu Italic
+[357] Ubuntu Light
+[358] Ubuntu Light Italic
+[359] Ubuntu Medium
+[360] Ubuntu Medium Italic
+[361] Ubuntu Mono
+[362] Ubuntu Mono Bold
+[363] Ubuntu Mono Bold Italic
+[364] Ubuntu Mono Italic
+[365] Ubuntu Thin
+[366] Umpush
+[367] Umpush Bold
+[368] Umpush Bold Oblique
+[369] Umpush Light
+[370] Umpush Light Oblique
+[371] Umpush Oblique
+[372] Uroob Regular
+[373] Vemana2000
+[374] Waree
+[375] Waree Bold
+[376] Waree Bold Oblique
+[377] Waree Oblique
+[378] Yrsa
+[379] Yrsa Bold
+[380] Yrsa Light
+[381] Yrsa Medium
+[382] Yrsa SemiBold
+[383] Z003-MediumItalic
+[384] aakar
+[385] mry_KacstQurn
+[386] padmaa
+[387] padmaa-Bold.1.1
+[388] padmaa-normal-indictrans
+[389] utkal medium

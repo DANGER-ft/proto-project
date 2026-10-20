@@ -39,7 +39,7 @@ function wait(t)
 end
 
 function open_boot_config()
---TODO: хз допишу то что в названии функции.
+	--TODO: хз допишу то что в названии функции.
 	drawImage("", 0, 0, 0)
 	wait(10000)
 end
@@ -57,7 +57,6 @@ end
 drawImage("/boot.png", 0, 0, 0)
 wait(2000)
 print("next step of loading..")
-
 
 --загрузочник
 local path_to_boot = readConfig("/run.conf", "sys")

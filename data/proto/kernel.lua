@@ -1,4 +1,3 @@
-
 --чтобы vs:code не ругался. но я во featherPad-е пишу, это забота о вас
 --...
 --...
@@ -83,12 +82,13 @@ function load_link()
 	pathes_to_img = {}
 	for i = 1, 12 do
 		links[i] = readConfig("/proto/user/config/userLinks.conf", "link" .. i)
-		print(links[i])
+		if links[i] ~= nil then
+			widget[i] = "/proto/user/links/" .. links[i]
+		end
 	end
 	print("next step")
 	for i = 1, #links do
 		pathes_to_img[i] = readConfig("/proto/user/links/" .. links[i], "img")
-		print(pathes_to_img[i])
 	end
 end
 
@@ -204,6 +204,14 @@ function main_navigation()
 			pressedKey = "-1"
 		end
 		drawRect(((_main_x - 1) * 43) + 1, ((_main_y - 1) * 35) + 1, 40, 35, hexTo565(labelOutline))
+		if pressedKey == "ENTER" then
+			local atr = readConfig(widget[main_x:read() + ((main_y:read() - 1) * 4)], "attribute")
+			if art ~= nil then
+				_G[atr] = readConfig(widget[main_x:read() + ((main_y:read() - 1) * 4)], "var")
+			end
+			add_function(0, "single", readConfig(widget[main_x:read() + ((main_y:read() - 1) * 4)], "func"))
+			pressedKey = "-1"
+		end
 	end
 end
 
@@ -220,7 +228,6 @@ function gui_navigation()
 	end
 	drawRect(0, 160 - ((changed_punct * 14) + 20), 80, 15, hexTo565(guiChangeColor))
 	if pressedKey == "ENTER" then
-		print("activate " .. gui_pathes[changed_punct])
 		add_function(0, "loop", gui_pathes[changed_punct])
 		kill_gui()
 		remove_function("gui_navigation()")
@@ -358,9 +365,12 @@ end
 function print_backscreen()
 	fastPngDraw(pathToBackscreen, 0, 0)
 	base_color_outline_widget = hexTo565(labelBaseOutline)
-	for y = 0, 4 do
-		for x = 0, 3 do
-			drawRect(((x - 1) * 43) + 1, ((y - 1) * 35) + 1, 40, 35, base_color_outline_widget)
+	for y = 0, 3 do
+		for x = 0, 2 do
+			drawRect(x * 43 + 1, y * 35 + 1, 40, 35, base_color_outline_widget)
+			if pathes_to_img[x + (y * 3) + 1] ~= nil then
+				fastPngDraw(pathes_to_img[x + (y * 3) + 1], (x * 43) + 4, (y * 35) + 2)
+			end
 		end
 	end
 end

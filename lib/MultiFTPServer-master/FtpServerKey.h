@@ -44,7 +44,7 @@
 #define DEBUG_PRINTER Serial
 
 // Define the maximum number of concurrent sessions
-#define FTP_MAX_SESSIONS 2
+#define FTP_MAX_SESSIONS 8
 
 #define STORAGE_SDFAT1 		1 	// Library SdFat version 1.4.x
 #define STORAGE_SDFAT2 		2 	// Library SdFat version >= 2.0.2

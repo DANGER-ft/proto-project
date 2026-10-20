@@ -1,4 +1,3 @@
-
 --загрузка
 ---@diagnostic disable: undefined-global
 runFile("/proto/taskManager.lua")

@@ -1,4 +1,4 @@
 img=/proto/res/files_from_oleg.png
-func=setupExplorer()
+func=explorer.setupExplorer()
 attribute=
 var=

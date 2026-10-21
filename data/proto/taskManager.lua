@@ -1,14 +1,17 @@
+task = {}
+
 --да тут вообще 3 независимых массива и 1 рассинхрон и привет синтакс еррор в сериале.
-tasks = {}
-taskType = {}
-taskStatus = {}
-deleted = {}
-newFunc = 0
-function add_to_table(tbl, value)
+task.tasks = {}
+task.taskType = {}
+task.taskStatus = {}
+task.deleted = {}
+task.newFunc = 0
+
+function task.add_to_table(tbl, value)
 	tbl[#tbl + 1] = value
 end
 
-function remove_from_table(tbl, index)
+function task.remove_from_table(tbl, index)
 	local removed = tbl[index]
 	for i = index, #tbl - 1 do
 		tbl[i] = tbl[i + 1]
@@ -17,58 +20,59 @@ function remove_from_table(tbl, index)
 	return removed
 end
 
-function activate(name, position)
+function task.activate(name, position)
 	local out = runString(name)
-	if taskType[position] == "single" then
-		local removedName = tasks[position]
-		remove_from_table(tasks, position)
-		remove_from_table(taskType, position)
-		remove_from_table(taskStatus, position)
-		add_to_table(deleted, removedName)
-		if #deleted > 10 then
-			remove_from_table(deleted, 1)
+	if task.taskType[position] == "single" then
+		local removedName = task.tasks[position]
+		task.remove_from_table(task.tasks, position)
+		task.remove_from_table(task.taskType, position)
+		task.remove_from_table(task.taskStatus, position)
+		task.add_to_table(task.deleted, removedName)
+		if #task.deleted > 10 then
+			task.remove_from_table(task.deleted, 1)
 		end
 	end
 end
 
-function run_task_manager()
-	if newFunc > 0 and taskStatus[newFunc] == 1 then
-		activate(tasks[newFunc], newFunc)
-		newFunc = 0
+function task.run_task_manager()
+	if task.newFunc > 0 and task.taskStatus[task.newFunc] == 1 then
+		task.activate(task.tasks[task.newFunc], task.newFunc)
+		task.newFunc = 0
 		return
 	end
-	for i = #taskStatus, 1, -1 do
-		if taskStatus[i] == 1 then
-			activate(tasks[i], i)
+	for i = #task.taskStatus, 1, -1 do
+		if task.taskStatus[i] == 1 then
+			task.activate(task.tasks[i], i)
 		end
 	end
-	for i = #taskStatus, 1, -1 do
-		if taskStatus[i] ~= 1 then
-			activate(tasks[i], i)
+	for i = #task.taskStatus, 1, -1 do
+		if task.taskStatus[i] ~= 1 then
+			task.activate(task.tasks[i], i)
 		end
 	end
 end
 
-function add_function(privelegion, type, name)
-	add_to_table(tasks, name)
-	add_to_table(taskType, type)
-	add_to_table(taskStatus, privelegion)
-	newFunc = #tasks
+function task.add_function(privelegion, type, name)
+	task.add_to_table(task.tasks, name)
+	task.add_to_table(task.taskType, type)
+	task.add_to_table(task.taskStatus, privelegion)
+	task.newFunc = #task.tasks
 end
 
-function remove_function(name)
-	for i = #tasks, 1, -1 do
-		if tasks[i] == name then
-			remove_from_table(tasks, i)
-			remove_from_table(taskType, i)
-			remove_from_table(taskStatus, i)
+function task.remove_function(name)
+	for i = #task.tasks, 1, -1 do
+		if task.tasks[i] == name then
+			task.remove_from_table(task.tasks, i)
+			task.remove_from_table(task.taskType, i)
+			task.remove_from_table(task.taskStatus, i)
 		end
 	end
 end
-function remove_all()
-	for i = 0, #tasks do
-		remove_from_table(tasks, i)
-		remove_from_table(taskType, i)
-		remove_from_table(taskStatus, i)
+
+function task.remove_all()
+	for i = 1, #task.tasks, -1 do
+		task.remove_from_table(task.tasks, i)
+		task.remove_from_table(task.taskType, i)
+		task.remove_from_table(task.taskStatus, i)
 	end
 end

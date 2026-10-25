@@ -33,7 +33,7 @@ local main_y = Counter(4, 1, false)
 local _main_x = 1
 local _main_y = 1
 
-local STRIDE = 7
+local STRIDE = 8
 local active_win = 0
 
 kernel.opened_window = {}
@@ -143,12 +143,12 @@ end
 
 --всякая шляпа
 function kernel.ex_loop()
-	if once("loop") then
+	if kernel.once("loop") then
 		print("loop")
 	end
 end
 function kernel.ex_print()
-	if once("print") then
+	if kernel.once("print") then
 		print("print")
 	end
 end
@@ -195,7 +195,6 @@ function kernel.kernel_loop_setup()
 	while true do
 		fillRect(33, 141, i, 8, hexTo565("#2A52BE"))
 		i = i + 1
-		delay(1)
 		if i == 63 then
 			break
 		end
@@ -326,7 +325,8 @@ function kernel.navigation_for_windows()
 				win_get(active_win, 1),
 				win_get(active_win, 2),
 				win_get(active_win, 3),
-				win_get(active_win, 6)
+				win_get(active_win, 6),
+				win_get(active_win, 7)
 			)
 			win_set(active_win, 4, 0)
 		end
@@ -353,7 +353,8 @@ function kernel.navigation_for_windows()
 					win_get(active_win, 1),
 					win_get(active_win, 2),
 					win_get(active_win, 3),
-					win_get(active_win, 6)
+					win_get(active_win, 6),
+					win_get(active_win, 7)
 				)
 				win_set(active_win, 4, 0)
 			end
@@ -496,7 +497,7 @@ function kernel.add_process(name, ico, func, func_to_print, windowed, sizeX, siz
 	kernel.opened_window[b + 4] = windowed and 0 or 1
 	kernel.opened_window[b + 5] = func
 	kernel.opened_window[b + 6] = once_print_func
-
+	kernel.opened_window[b + 7] = windowed 
 	if windowed == true then
 		for i = 1, idx - 1 do
 			if win_get(i, 4) == 0 then
@@ -505,7 +506,7 @@ function kernel.add_process(name, ico, func, func_to_print, windowed, sizeX, siz
 			end
 		end
 		kernel.make_window(name, sizeX, sizeY, func_to_print, once_print_func)
-		active_win = idx
+				active_win = idx
 	end
 
 	kernel.add_hot_bar_punct(ico, func)
@@ -520,9 +521,14 @@ function kernel.collapse_process(func_to_print)
 	kernel.print_backscreen()
 end
 
-function kernel.discollapse_process(name, func_to_print, sizeX, sizeY, once_print_func)
+function kernel.discollapse_process(name, func_to_print, sizeX, sizeY, once_print_func, windowed)
 	print("process discollapse")
+	print(windowed)
+	if windowed then
 	kernel.make_window(name, sizeX, sizeY, func_to_print)
+	else
+		task.add_function(0, "loop", func_to_print)
+	end
 	if once_print_func then
 		task.add_function(0, "single", once_print_func)
 	end

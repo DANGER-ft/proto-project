@@ -1,0 +1,8 @@
+pix = {}
+function pix.init()
+print("init")
+	return "pix", "0.1", "pixel"
+end
+function pix.exit()
+	_G.pix = nil
+end

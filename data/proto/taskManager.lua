@@ -70,9 +70,9 @@ function task.remove_function(name)
 end
 
 function task.remove_all()
-	for i = 1, #task.tasks, -1 do
-		task.remove_from_table(task.tasks, i)
-		task.remove_from_table(task.taskType, i)
-		task.remove_from_table(task.taskStatus, i)
-	end
+	task.tasks = {}
+	task.taskType = {}
+	task.taskStatus = {}
+	task.deleted = {}
+	task.newFunc = 0
 end

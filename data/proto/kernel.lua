@@ -1,3 +1,4 @@
+
 kernel = {}
 
 --чтобы vs:code не ругался. но я во featherPad-е пишу, это забота о вас
@@ -78,7 +79,26 @@ local function win_remove(idx)
 		kernel.opened_window[i] = nil
 	end
 end
+--событие процессов останавливающее их и выделающее время на функцию и сервисы
+function kernel.task_event(func)
+	local tasks = task.tasks
+	local taskType = task.taskType
+	local taskStatus = task.taskStatus
+	local deleted = task.deleted
+	local newFunc = task.newFunc
+	task.remove_all()
+	task.add_function(1, "loop", "kernel.kernel_loop()")
+	if kernel.pressedKey == "INSERT" then
+		task.tasks = tasks
+		task.taskType = taskType
+		task.taskStatus = taskStatus
+		task.deleted = deleted
+		task.newFunc = newFunc
+		kernel.pressedKey = "-1"
+	end
+end
 
+--подгрузка ярлыков
 function kernel.load_link()
 	local links = {}
 	kernel.pathes_to_img = {}
@@ -93,7 +113,7 @@ function kernel.load_link()
 		kernel.pathes_to_img[i] = readConfig("/proto/user/links/" .. links[i], "img")
 	end
 end
-
+--подгрузка конфигов
 function kernel.load_conf()
 	kernel.labelBaseOutline = kernel.load_ui_config("labelBaseOutline")
 	kernel.hotBarColor = kernel.load_ui_config("hotBarColor")
@@ -106,25 +126,7 @@ function kernel.load_conf()
 	kernel.windowHeadColor = kernel.load_ui_config("windowHeadColor")
 	kernel.windowOutlineColor = kernel.load_ui_config("windowOutlineColor")
 end
-
-function kernel.ex()
-	kernel.returned = 4
-	root.global_while = false
-	task.remove_all()
-	fillScreen(rgbTo565(0, 0, 0))
-end
-
-function kernel.restart()
-	drawFsImage(0, 0, "/proto/res/protoIco.png")
-	setTextColor(rgbTo565(42, 82, 190))
-	drawCentreString("reloading...", 64, 140)
-	delay(700)
-	kernel.returned = 2
-	root.global_while = false
-	task.remove_all()
-	fillScreen(rgbTo565(0, 0, 0))
-end
-
+--типо первый ли раз ключ
 function kernel.once(text)
 	if not used[text] then
 		used[text] = true
@@ -132,6 +134,37 @@ function kernel.once(text)
 	else
 		return false
 	end
+end
+--теперь это для тестов просто
+function kernel.ex()
+	kernel.add_process("ex", "null", "kernel.ex_loop()", "kernel.ex_print()", false, 128, 140, "kernel.ex_once_print()")
+	task.remove_function("kernel.ex()")
+end
+
+--всякая шляпа
+function kernel.ex_loop()
+	if once("loop") then
+		print("loop")
+	end
+end
+function kernel.ex_print()
+	if once("print") then
+		print("print")
+	end
+end
+function kernel.ex_once_print()
+	print("once")
+end
+--перезагрузка (exit code 2)
+function kernel.restart()
+	drawFsImage(0, 0, "/proto/res/protoIco.png")
+	setTextColor(rgbTo565(42, 82, 190))
+	drawCentreString("reloading...", 64, 140)
+	delay(700)
+	returned = 2
+	root.global_while = false
+	task.remove_all()
+	fillScreen(rgbTo565(0, 0, 0))
 end
 
 function kernel.load_ui_config(key)
@@ -450,7 +483,7 @@ end
 
 function kernel.add_process(name, ico, func, func_to_print, windowed, sizeX, sizeY, once_print_func)
 	print("added process")
-	if ico == "null" then
+	if ico == "null" or ico == "nil" then
 		ico = "/proto/res/none.png"
 	end
 

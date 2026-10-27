@@ -3,11 +3,11 @@ local config = {}
 local baseline = {}
 local objects = {}
 local globalCounter = 1
-
+local globalCounterList = 1
 --список евентов
 local events = {}
 --обязательные параметры
-baseline["window"] = { "width", "height", "name", "ico", "loop_func", "print_func", "open_func" }
+baseline["window"] = { "width", "height", "name", "ico", "loop_func", "print_func"}
 --обработка строк для конфигов
 local function parse(str)
 	local data = {}
@@ -43,9 +43,10 @@ end
 
 --заносит объект в список и придаёт ему позицию, значение, тип объекта
 local function getId(obj, name)
-	objects[globalCounter] = name .. "." .. obj
+	objects[globalCounterList] = name .. "." .. obj
 	local id = globalCounter .. "." .. name .. "." .. obj
 	globalCounter = globalCounter + 1
+	globalCounterList = globalCounterList + 1
 	return id
 end
 --поделим id
@@ -61,10 +62,11 @@ function pix.deleteObject(id)
 	for i = 1, #objects do
 		if objects[i] == id then
 			task.remove_from_table(objects, i)
+			globalCounterList = globalCounterList - 1
 			return true
 		end
 	end
-	return true
+	return false
 end
 --стиль конфа будет похож на css т.к. не хочу уйти в lvgl(если он вам нужен то биндинги есть, юзайте)
 function pix.loadConfig(data)
@@ -78,8 +80,11 @@ function pix.loadConfig(data)
 	return true
 end
 
---создание окна
+--это типо когда открывают
+function pix.discollapsePrint()
 
+end
+--создание окна
 --[[
 #### обязательные пункты ####
 width 
@@ -88,7 +93,6 @@ name
 ico
 loop_func
 print_func
-open_func
 
 #### дополнительно ####
 backscreen_color
@@ -102,12 +106,13 @@ title_background
 title_align
 
 ]]
+
 function pix.addWindow()
 	if not checkConf("window") then
 		return false
 	end
 	local win = config["window"]
-	kernel.add_process(win.name, win.ico, win.loop_func, win.print_func, true, win.width, win.height, win.open_func)
+	kernel.add_process(win.name, win.ico, win.loop_func, win.print_func, false, win.width, win.height, "pix.discollapsePrint()")
 	setTextColor(hexTo565(win.title_color))
 	fillRect(0, 0, sizeX, sizeY, hexTo565(kernel.windowColor))
 	fillRect(1, 1, sizeX - 2, 15, hexTo565(kernel.windowHeadColor))

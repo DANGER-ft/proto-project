@@ -1,4 +1,3 @@
-
 kernel = {}
 
 --чтобы vs:code не ругался. но я во featherPad-е пишу, это забота о вас
@@ -497,7 +496,7 @@ function kernel.add_process(name, ico, func, func_to_print, windowed, sizeX, siz
 	kernel.opened_window[b + 4] = windowed and 0 or 1
 	kernel.opened_window[b + 5] = func
 	kernel.opened_window[b + 6] = once_print_func
-	kernel.opened_window[b + 7] = windowed 
+	kernel.opened_window[b + 7] = windowed
 	if windowed == true then
 		for i = 1, idx - 1 do
 			if win_get(i, 4) == 0 then
@@ -506,7 +505,7 @@ function kernel.add_process(name, ico, func, func_to_print, windowed, sizeX, siz
 			end
 		end
 		kernel.make_window(name, sizeX, sizeY, func_to_print, once_print_func)
-				active_win = idx
+		active_win = idx
 	end
 
 	kernel.add_hot_bar_punct(ico, func)
@@ -525,7 +524,7 @@ function kernel.discollapse_process(name, func_to_print, sizeX, sizeY, once_prin
 	print("process discollapse")
 	print(windowed)
 	if windowed then
-	kernel.make_window(name, sizeX, sizeY, func_to_print)
+		kernel.make_window(name, sizeX, sizeY, func_to_print)
 	else
 		task.add_function(0, "loop", func_to_print)
 	end

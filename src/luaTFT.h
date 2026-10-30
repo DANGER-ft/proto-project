@@ -877,7 +877,7 @@ static uint16_t pngSmallLineBuffer[PNG_SMALL_MAX];
 
 static int pngSmallDrawCallback(PNGDRAW *pDraw) {
     if (pDraw->y >= pngSmallDecodeHeight) return 1;
-    png->getLineAsRGB565(pDraw, pngSmallLineBuffer, PNG_RGB565_LITTLE_ENDIAN, 0xffffffff);
+    png->getLineAsRGB565(pDraw, pngSmallLineBuffer, PNG_RGB565_LITTLE_ENDIAN, 0xffffff);
     int y = pDraw->y;
     int w = (pDraw->iWidth > pngSmallDecodeWidth) ? pngSmallDecodeWidth : pDraw->iWidth;
     memcpy(&pngSmallDecodeBuffer[y * pngSmallDecodeWidth], pngSmallLineBuffer, w * sizeof(uint16_t));

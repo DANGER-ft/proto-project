@@ -1,0 +1,49 @@
+version: "0.9.4"
+description: >-
+  A self-contained 3D renderer for embedded targets: a binary asset container,
+  skeletal animation, tile binning, a software rasterizer and a 2D canvas.
+  Header-only, with no third-party dependency of any kind.
+url: "https://github.com/0015/a3d"
+repository: "https://github.com/0015/a3d.git"
+issues: "https://github.com/0015/a3d/issues"
+documentation: "https://github.com/0015/a3d#readme"
+license: "Apache-2.0"
+
+# Every tag must match ^[A-Za-z0-9_-]{3,32}$ - the registry rejects "3d" for
+# being two characters, which is only visible when a build validates the
+# manifest.
+tags:
+  - 3d-graphics
+  - renderer
+  - rasterizer
+  - graphics
+  - gltf
+  - animation
+  - display
+
+dependencies:
+  idf: ">=5.0"
+
+files:
+  exclude:
+    - "**/build/**"
+    - "**/managed_components/**"
+    - "**/.cache/**"
+    - "**/sdkconfig"
+    - "**/sdkconfig.old"
+    - "**/.DS_Store"
+
+    # The README's two images are served from raw.githubusercontent.com, not
+    # from here, so shipping them would put 3.3 MB into every consumer's
+    # managed_components/ to render a page the registry hosts itself.
+    - "a3d_banner.jpeg"
+    - "a3d_showcase.gif"
+
+    # The Arduino examples are 2.6 MB of model-as-header arrays, and nothing
+    # in an ESP-IDF build reaches them - Arduino gets this tree through the
+    # Library Manager and PlatformIO, both of which package it separately.
+    - "examples/Arduino/**"
+
+    # Tutorial_01's README pictures, 1.1 MB, served from raw like the two
+    # above. The tutorial builds without them.
+    - "examples/ESP-IDF/Tutorial_01/docs/**"

@@ -692,9 +692,15 @@ static int ftp(lua_State *L)
      ftpSrv.handleFTP();
     return 0;
 }
-
+static int ftpBegin(lua_State *L)
+{
+  ftpSrv.begin(luaL_checkstring(L, 1), luaL_checkstring(L, 2));
+    return 0;
+}
+ 
 void makeMemory(LuaWrapper &lua)
 {
+lua.Lua_register("ftpBegin", (const lua_CFunction)&ftpBegin);
 lua.Lua_register("ftpTick", (const lua_CFunction)&ftp);
 lua.Lua_register("scanDirs", (const lua_CFunction)&lua_scanDirs);
     lua.Lua_register("scanFiles", (const lua_CFunction)&lua_scanFiles);

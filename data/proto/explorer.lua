@@ -537,17 +537,12 @@ function explorer.setupExplorer()
 	)
 	explorer._fileList = scanFiles(explorer.standart_folder, "*", "*")
 	explorer.dirList = scanDirs(explorer.standart_folder)
-	print("add /")
 	for i = 1, #explorer.dirList do
 		explorer.dirList[i] = explorer.dirList[i] .. "/"
 	end
-	print("merge")
 	explorer.fileList = merge(explorer.dirList, explorer._fileList)
-	print("set folder")
 	explorer.folder = explorer.standart_folder
-	print("path & draw files")
 	explorer.pathHead(explorer.folder)
 	explorer.drawFiles(explorer.folder, 1, 1)
-	print("exit setup")
 	task.remove_function("explorer.setupExplorer()")
 end

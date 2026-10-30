@@ -1,0 +1,220 @@
+# Changelog
+
+All notable changes to a3d are recorded here. The format follows
+[Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and versions follow
+[Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [0.9.4] - 2026-10-05
+
+A lighting fix on the binned path, and a tutorial. A skinned model renders
+exactly as it did on 0.9.3; a model whose parts are placed by node transforms
+is lit as the unbinned path always lit it.
+
+### Fixed
+- **A container whose parts are placed by node transforms was lit wrongly by
+  `a3d::Viewer`, and by anything else on the binned path.**
+  `SceneRuntime::drawDrawableTile()` sets the material and the shading model
+  before handing the backend a `ProjectedBatch`, but never set the MODEL
+  MATRIX. Positions do not need it - the binner has already projected them -
+  but lighting does: the backend carries the light into the mesh's own space
+  using that matrix, so without it every rotated part was lit as though it had
+  not been rotated.
+
+  Invisible on a SKINNED model, which is why it survived: skinning has already
+  put the normals in world space and `_modelMatrix()` hands back identity for
+  one, so Fox and CesiumMan - both skinned, and both of the shipped fixtures -
+  render byte for byte identically before and after this change. Every
+  published measurement stands.
+
+  Measured on a 7-part node-animated car at 400x400 with the light a3d
+  defaults to: mean red across the lit pixels went from 5.7/31 to 13.2/31, and
+  13.2 is what the unbinned path (`SceneRuntime::draw()`, which `a3d_view`
+  uses) produced from the same light all along. The two paths are meant to
+  agree, and the comment above `_prepare()` says so.
+
+  `Viewer::_drawMeshTile()` had this right for the array path and carries the
+  comment explaining why; the container path is now the same.
+
+### Added
+- `examples/ESP-IDF/Tutorial_01`: six lessons from an empty screen to an
+  endless top-down race track, selected by one `#define`. Splits into a board
+  half and an a3d half that names no vendor header, so the lessons compile on
+  a host - which is how its README's pictures were made.
+
+  It is **landscape on a panel that scans portrait**, which a MIPI-DSI video
+  panel cannot be asked to do: the DPI peripheral scans the framebuffer out in
+  hardware and `esp_lcd_panel_swap_xy()` is not implemented for it. So the
+  example draws 1280x800 and rotates each strip into the 800x1280 panel in its
+  own `a3d::Display` wrapper - which needs no change to a3d at all, because a
+  Display is a size and a blit and nothing above it can tell that the blit
+  happens to turn the pixels. The transpose is checked pixel for pixel against
+  an independent rotation, both directions, with tile heights that do and do
+  not divide the screen, and the example has been flashed and run on the
+  Waveshare ESP32-P4-Nano with the 10.1" panel it is written for, where the
+  full scene runs at 14 fps.
+
+### Changed
+- `idf_component.yml` also excludes `examples/ESP-IDF/Tutorial_01/docs/**`,
+  the tutorial's 1.1 MB of README pictures, which its README already serves
+  from `raw.githubusercontent.com`. The tutorial builds without them.
+- The README's install examples and `a3d_export.py --project` pin `v0.9.4`.
+
+## [0.9.3] - 2026-09-14
+
+Packaging only. Nothing in `src/` moved, and a build that worked on 0.9.2
+builds identically here.
+
+The first upload to the ESP Component Registry carried 4.1 MB, of which 5.8 MB
+uncompressed was pictures and Arduino model headers: `idf.py add-dependency`
+put the banner, the showcase GIF and two model-as-header arrays into every
+consumer's `managed_components/`, and no ESP-IDF build reads any of them.
+
+### Changed
+- The README's two images are referenced by absolute
+  `raw.githubusercontent.com` URL rather than by relative path, so they render
+  on the registry and on PlatformIO without the files being shipped.
+- `idf_component.yml` excludes `a3d_banner.jpeg`, `a3d_showcase.gif` and
+  `examples/Arduino/**`; `library.json` excludes the two images. The registry
+  archive drops from 4.1 MB to 0.5 MB. Arduino and PlatformIO still get
+  the Arduino examples - only the ESP-IDF package leaves them out.
+- The README's ESP-IDF install section leads with
+  `idf.py add-dependency "0015/a3d^0.9.3"` now that the component is on the
+  registry, and keeps the git dependency as the way to get the tree the
+  registry copy trims. `a3d_export.py --project` pins `v0.9.3`.
+
+## [0.9.2] - 2026-09-12
+
+Transparency, which a3d does not have and had not been saying so. A glTF
+material marked `alphaMode: BLEND` is not drawn faint by this renderer, it is
+drawn solid - and the importer had been ignoring the field without a word.
+
+### Added
+- `--drop-blend` for `a3d_export.py`: leave out primitives whose glTF material
+  is `alphaMode: BLEND` or `MASK`.
+
+### Changed
+- **A non-opaque material now warns on every import.** a3d writes every covered
+  pixel opaquely - there is no alpha blend and no alpha test - and the importer
+  had been ignoring `alphaMode` silently. The shapes authored for BLEND are the
+  ones meant to be nearly invisible (a propeller blur disc, a soft shadow quad,
+  a glow card), so they are large and they sit in front of the model.
+
+  They are also in `worldBounds()`, which is the half that does not look like a
+  transparency problem: on one stylized aircraft 40 triangles of 7,692 inflated
+  the bounding box from 1.37 to 3.24 and pushed the framing camera 2.4x too far
+  back. The vertex, triangle, material and texture counts were all correct, so
+  nothing that counts could see it - the same shape as the Draco import this
+  project already refuses by name.
+
+## [0.9.1] - 2026-09-11
+
+Panels you already have, rather than a longer catalogue of panels a3d has
+driven. The catalogue in `tools/a3d_panel.py` is deliberately small - a bus is
+in it only if its bring-up came from a project in this tree that has driven
+real glass - and that leaves out almost every board. Every esp_lcd driver in
+the component registry, every vendor fork and every BSP ends at an
+`esp_lcd_panel_handle_t`, so the way in is one adapter rather than thirty
+entries, and the pins stay in the code that already works on your desk.
+
+### Added
+- `a3d::EspLcdDisplay` (`src/backends/esp_lcd/a3d_display_esp_lcd.h`): an
+  `a3d::Display` from an `esp_lcd_panel_handle_t` you already have. It owns the
+  completion wait, the drain of stale tokens, the bus mutex two workers need,
+  and optional touch. Header-only, and the optional dependencies
+  (`esp_lcd_mipi_dsi.h`, `esp_lcd_touch.h`) are probed with `__has_include`, so
+  a project without them compiles the feature out rather than failing.
+- `--panel esp_lcd_custom` for `a3d_export.py --project`: a generated `panel.c`
+  with one empty `panel_bring_up()` and everything else written. It builds and
+  flashes as generated and says the function is empty, rather than refusing to
+  compile until you have written the hard part. Its size comes from
+  `--viewport`, because it is the one panel whose glass a3d has not been told
+  about.
+
+- `docs/DISPLAY_ESP_IDF.md` and `docs/DISPLAY_ARDUINO.md`: how to get a panel
+  lit, one file per framework. Bringing up a display is the step most people
+  stop at, and every hard part of it is invisible - the DMA wait that must not
+  return early, the byte order that turns a black background pink, the bus
+  mutex two workers need, the tile buffers that land in PSRAM on an Arduino
+  board by default. Both carry a symptom table and a bring-up ladder that
+  separates "it drew nothing" from "it drew and the panel did not show it".
+
+### Fixed
+- **The generated MIPI-DSI glue did not wait for its tile.** Its comment said a
+  DPI `draw_bitmap` is a plain memory write, which is true only without DMA2D -
+  and it enables DMA2D. With DMA2D the copy is asynchronous, the call returns
+  with the 2D-DMA still reading the tile, and the next call is rejected with
+  `ESP_ERR_INVALID_STATE`. It now registers `on_color_trans_done` and waits, as
+  the hardware-verified example in this tree already did.
+- **The generated project pinned `waveshare/esp_lcd_jd9365` to `~1.0.6`,** which
+  cannot compile on ESP-IDF 6.0: 5.5 still carries
+  `esp_lcd_panel_dev_config_t::color_space` as a deprecated union member and 6.0
+  deleted it. The range is `>=1.0.6,<3.0.0` now, so the solver picks 1.x for
+  IDF 5 and 2.x for IDF 6. Both were built to a flashable binary.
+- The generated project README advertised `--resolution`, which is not a flag.
+  It is `--viewport`.
+
+## [0.9.0] - 2026-09-10
+
+First public release.
+
+0.9 rather than 1.0 because the container format is at v0.1 and is still
+allowed to change: a `MRPH` chunk is reserved but unimplemented, and the
+`uint16` vertex index is a format-level ceiling that a future version may
+raise. Everything documented in the README as verified has been run on
+hardware.
+
+### Added
+- Binary asset container (`.a3d`): offsets rather than pointers, so an image
+  is usable in place from memory-mapped flash with no fixup pass.
+- Scene runtime: node hierarchy, world transforms, materials, textures.
+- Skeletal animation: clip playback, quantized channels, GPU-free skinning
+  parallelised across an executor.
+- Tile binner: per-tile triangle lists, so a scene renders into a small
+  internal-RAM tile rather than a full framebuffer.
+- Software rasterizer (`SoftBackend`): RGB565, Gouraud and flat shading,
+  perspective-correct texturing with mipmaps, nearest and bilinear filtering,
+  specular, transparency, depth-aware 3D lines, and a no-depth fast path.
+- 2D canvas and bitmap text: a hand-authored 5x7 font, plus generated 8x14,
+  12x21 and 20x35 sizes in a header each, and one blitter that reads all of
+  them. `tools/gen_font.py` produces more from any monospace TTF whose licence
+  allows it; see `docs/FONTS.md`.
+- Executors: serial, `std::thread`, and FreeRTOS.
+- Loaders: stdio, ESP-IDF partition, SD/SDMMC, and STL (binary and ASCII, from
+  a file or from memory, welded and fed through the same binner and rasterizer
+  as a container mesh).
+- Python exporter: glTF/GLB to `.a3d`, with mesh decimation and animation
+  key reduction.
+- **Arduino library support, from the same files as the ESP-IDF component.**
+  Everything lives under one `src/` root because Arduino adds exactly
+  `<lib>/src` to the include path and will not add a second; ESP-IDF is told
+  `INCLUDE_DIRS "src"` and every `#include "a3d/..."`, `"viewer/..."`,
+  `"backends/..."` and `"loaders/..."` resolves from it. `#include <a3d.h>`
+  brings up the renderer in one line - it is at the root of `src/` because
+  Arduino's resolver indexes only the headers directly there, and a library
+  whose every header is one level down is never matched at all.
+- Two Arduino sketches under `examples/Arduino/`, which the IDE shows as one
+  submenu. `Waveshare_ESP32-S3-Touch-AMOLED-1.75C` puts Fox and CesiumMan on a
+  466x466 round AMOLED and runs from boot; `Model_From_Header` renders off
+  screen and needs no wiring at all. Both compiled and linked on arduino-esp32
+  3.3.10. **Neither has been flashed.**
+- `tools/a3d_export.py --header FILE.a3d` writes a container as a C byte array,
+  which is the only way onto an Arduino board short of a file system. The array
+  is 4-byte aligned, and that is required rather than cosmetic: a3d casts the
+  base pointer to the file header, so an unaligned container is refused on the
+  board and never at compile time.
+- `a3d::Viewer` (`src/viewer/a3d_viewer.h`): a model on a screen in four calls -
+  `begin()`, an `open*()`, `frame()`. It owns the tile buffers, the binners,
+  the orbit camera and the animation player, and it exists to make the orderings
+  that are silent when wrong impossible to get wrong.
+- `a3d_view`: renders a container to a PNG contact sheet on the host, so an
+  asset can be looked at before it is ever flashed.
+- `a3d_export.py --project DIR` writes a buildable ESP-IDF project around a
+  model, and `--panel` / `--touch` generate the display glue for the buses this
+  project has driven glass with.
+- Board detection for ESP32-P4, ESP32-S3 and ESP32-C6, including whether the
+  part has a floating-point unit.
+
+### Known limitations
+See the README. The short version: textures must be power-of-two RGB565, a
+single mesh cannot exceed 65,535 vertices, there is no top-left fill rule, and
+a part without an FPU (ESP32-C6) is roughly an order of magnitude slower.

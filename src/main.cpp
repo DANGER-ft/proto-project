@@ -27,10 +27,7 @@ FtpServer ftpSrv;
 #include <LuaUtilites.h>
 #include <memory.h>
 
-
-const char* ssid = "бебебе";
-const char* password = "бабаба";
-
+#include "configs.h" //проверьте чтобы был
 static bool tftJpgOutput(int16_t x, int16_t y, uint16_t w, uint16_t h, uint16_t *bitmap)
 {
   tft.pushImage(x, y, w, h, bitmap);
@@ -56,21 +53,6 @@ void setup()
   Serial.printf("Heap:  %d\n", ESP.getFreeHeap());
   lvgl_bridge_init();
   lvgl_fs_init();
--
-  Serial.print("Connecting to ");
-  Serial.println(ssid);
-  WiFi.begin(ssid, password);
-  while (WiFi.status() != WL_CONNECTED) {
-    delay(500);
-    Serial.print(".");
-  }
-  Serial.println("\nWiFi connected.");
-  Serial.print("FTP IP: ");
-  Serial.println(WiFi.localIP());
-
-  ftpSrv.begin("esp32", "esp32"); 
-
-
   LuaCounter(lua);
   LuaTimer(lua);
   makeDelay(lua);
@@ -96,7 +78,6 @@ void setup()
 static uint32_t last = 0;
 void loop()
 {
-  ftpSrv.handleFTP(); 
   if (millis() - last >= 5)
   {
     last = millis();

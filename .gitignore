@@ -17,3 +17,4 @@ lib/**/.git/
 lib/**/.github/
 lib/**/*.a
 lib/**/*.o
+src/configs.h

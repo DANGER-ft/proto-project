@@ -78,25 +78,6 @@ local function win_remove(idx)
 		kernel.opened_window[i] = nil
 	end
 end
---событие процессов останавливающее их и выделающее время на функцию и сервисы
-function kernel.task_event(func)
-	local tasks = task.tasks
-	local taskType = task.taskType
-	local taskStatus = task.taskStatus
-	local deleted = task.deleted
-	local newFunc = task.newFunc
-	task.remove_all()
-	task.add_function(1, "loop", "kernel.kernel_loop()")
-	if kernel.pressedKey == "INSERT" then
-		task.tasks = tasks
-		task.taskType = taskType
-		task.taskStatus = taskStatus
-		task.deleted = deleted
-		task.newFunc = newFunc
-		kernel.pressedKey = "-1"
-	end
-end
-
 --подгрузка ярлыков
 function kernel.load_link()
 	local links = {}

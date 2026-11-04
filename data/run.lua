@@ -84,17 +84,17 @@ if returned == 0 then
 end
 
 if returned == 1 then
-	print("bad exit, crash")
-	drawImage("die.png", 0, 0, 0)
+	print("######bad exit, crash######")
+	drawImage("/die.png", 0, 0, 0)
 end
 if returned == 2 then
-	print("good exit, reboot")
+	print("######good exit, reboot######")
 	reboot()
 end
 if returned == 3 then
-	print("good exit, go to run config")
+	print("######good exit, go to run config######")
 	open_boot_config()
 end
 if returned == 4 then
-	print("good exit, end")
+	print("######good exit, end######")
 end

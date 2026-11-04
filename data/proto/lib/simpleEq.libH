@@ -1,0 +1,7 @@
+simpleEq = {}
+fucntion simpleEq.init()
+return "simEq", "0.1"
+end
+function simpleEq.exit()
+simEq = {}
+end

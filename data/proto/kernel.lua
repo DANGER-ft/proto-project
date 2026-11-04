@@ -25,7 +25,7 @@ local gui_max_punct = 7
 local changed_punct = 1
 local gui_punct = Counter(gui_max_punct, 1, true)
 local gui_elements = { "restart", "fayly olega", "PelzigerFemj", "settings", "ptView", "you're gay", "trololo.mp3" }
-local gui_pathes = { "kernel.restart()", "explorer.setupExplorer()", "kernel.ex()" }
+local gui_pathes = { "kernel.restart()", "explorer.setupExplorer()", "txt.setup()" }
 
 local main_x = Counter(3, 1, true)
 local main_y = Counter(4, 1, false)
@@ -121,20 +121,6 @@ function kernel.ex()
 	task.remove_function("kernel.ex()")
 end
 
---всякая шляпа
-function kernel.ex_loop()
-	if kernel.once("loop") then
-		print("loop")
-	end
-end
-function kernel.ex_print()
-	if kernel.once("print") then
-		print("print")
-	end
-end
-function kernel.ex_once_print()
-	print("once")
-end
 --перезагрузка (exit code 2)
 function kernel.restart()
 	drawFsImage(0, 0, "/proto/res/protoIco.png")
@@ -189,7 +175,7 @@ function kernel.kernel_loop_setup()
 	kernel.make_hot_bar()
 	kernel.print_backscreen()
 	cursor_change = "main"
-	task.add_function(1, "loop", "kernel.kernel_loop()")
+	task.add_function(3, "loop", "kernel.kernel_loop()")
 	task.add_function(0, "loop", "kernel.gui()")
 	task.add_function(0, "loop", "kernel.navigation_for_windows()")
 	task.add_function(0, "loop", "kernel.main_navigation()")

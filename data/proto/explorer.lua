@@ -5,10 +5,8 @@ explorer.formatsTxt =
 	{ ".txt", ".csv", ".tsv", ".json", ".jsonl", ".xml", ".html" },
 	{ ".md", ".rst", ".yaml", ".toml", ".ini", ".cfg", ".conf", ".log" },
 	{ ".sql", ".env", ".properties", ".srt", ".vtt", ".rtf" }
-	
-	
-explorer.formatsImg = { ".jpg", ".png", ".gif", ".webp", ".svg", ".ico" }
 
+explorer.formatsImg = { ".jpg", ".png", ".gif", ".webp", ".svg", ".ico" }
 
 explorer.formatsCode = { ".js", ".cpp", ".py", ".rb", ".php", ".sh", ".bash", ".bat", ".cmd", ".lua" }
 

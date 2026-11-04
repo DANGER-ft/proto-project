@@ -1,69 +1,86 @@
 graph = {}
 local inputLabel = ""
-local color
+local color = ""
+local btnColor = ""
 local text = ""
+local textColor = ""
+--отсюда текст получать
+graph.exitText = ""
+--вывел в отдельныю, зач не знаю
 local function getInput()
-return text:sub(-12) .. "_"
+	return text:sub(-12) .. "_"
 end
-function graph.input(label, col)
-	if label then
-		inputLabel = label
-	else
-		inputLabel = "print..."
-	end
-		if col then
-		color = col
-	else
-		color = "#556677"
-	end
-	text = ""
-	fillRect(14, 50, 100, 40, hexTo565(color))
-	drawRect(14, 50, 100, 40, hexTo565(kernel.windowOutlineColor))
-	drawRect(24, 55, 80, 11, hexTo565(kernel.windowOutlineColor))
-	drawString(inputLabel, 26, 55)
-	local tasks = task.tasks
-	local taskType = task.taskType
-	local taskStatus = task.taskStatus
-	local deleted = task.deleted
-	local newFunc = task.newFunc
-	task.remove_all()
-	task.add_function(1, "loop", "kernel.kernel_loop()")
-	task.add_function(1, "loop", "graph.inputTick()")
-end
-function graph.getInput()
-return text
-end
+--маин процесс для обработки ввода
 function graph.inputTick()
-	fillRect(14, 50, 100, 20, hexTo565(color))
-	drawRect(14, 50, 100, 20, hexTo565(kernel.windowOutlineColor))
-	drawRect(24, 55, 80, 11, hexTo565(kernel.windowOutlineColor))
 	if #text == 0 then
-	drawString(inputLabel, 26, 55)
+		drawString(inputLabel, 26, 57)
 	else
-	drawString(getInput(), 26, 55)
+		drawString(getInput(), 26, 57)
+	end
+	if kernel.pressedKey == "ESC" then
+		print("exit")
+		kernel.pressedKey = "-1"
+		graph.exitText = ""
+		task.remove_function("graph.inputTick()")
 	end
 	if kernel.pressedKey == "ENTER" then
-		print("exit")
-		task.remove_all()
-		task.tasks = tasks
-		task.taskType = taskType
-		task.taskStatus = taskStatus
-		task.deleted = deleted
-		task.newFunc = newFunc
+		print("return")
 		kernel.pressedKey = "-1"
-		return
+		graph.exitText = text
+		task.remove_function("graph.inputTick()")
 	end
 	if kernel.pressedKey == "BACKSPACE" then
 		print("/b")
 		if #text > 0 then
-		text = text:sub(1, -2)
+			text = text:sub(1, -2)
 		end
 		fillRect(25, 56, 78, 9, hexTo565(color))
 		kernel.pressedKey = "-1"
 	end
 	if kernel.pressedKey ~= "-1" then
 		text = text .. kernel.pressedKey
-		fillRect(25, 56, 78, 9, hexTo565("#556677"))
+		fillRect(25, 56, 78, 9, hexTo565(color))
 		kernel.pressedKey = "-1"
 	end
+end
+--инициализация
+function graph.input(label, col, btnCol, textCol)
+	print("input activate")
+	if label then
+		inputLabel = label
+	else
+		inputLabel = "print..."
+	end
+	
+	if col then
+		color = col
+	else
+		color = "#556677"
+	end
+	
+	if btnCol then
+		btnColor = btnCol
+	else
+		btnColor = "#38444f"
+
+	if textCol then
+		textColor = = textCol
+	else
+		textColor = = "#0e1013"
+	end
+
+	text = ""
+	--setTextColor(hexTo565(textColor))
+	fillRect(14, 50, 100, 40, hexTo565(color))
+	drawRect(14, 50, 100, 40, hexTo565(kernel.windowOutlineColor))
+	drawRect(24, 55, 80, 12, hexTo565(kernel.windowOutlineColor))
+	drawString(inputLabel, 26, 57)
+	fillRect(24, 75, 30, 11, hexTo565(btnColor))
+	fillRect(73, 75, 30, 11, hexTo565(btnColor))
+	drawRect(24, 75, 30, 11, hexTo565(kernel.windowOutlineColor))
+	drawRect(73, 75, 30, 11, hexTo565(kernel.windowOutlineColor))
+	drawString("ESC", 31, 77)
+	drawString("ENT", 80, 77)
+	--Теперь лучше
+	task.add_function(2, "loop", "graph.inputTick()")
 end

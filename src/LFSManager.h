@@ -6,7 +6,7 @@
 #include <FS.h>
 using fs::File;
 // #define LFS_DEBUG
-
+//Хех оно не работает, чинить надо, кто хочет-озадачтесь
 #ifdef LFS_DEBUG
 #define DEBUG_PRINT(...) Serial.print(__VA_ARGS__)
 #define DEBUG_PRINTLN(...) Serial.println(__VA_ARGS__)
